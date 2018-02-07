@@ -37,10 +37,8 @@ class App extends React.Component {
                     >
                         <Row>
                             <Col width={12} md={3} push={{ md: 9 }}>
-                                <h2>Sidebar</h2>
                             </Col>
                             <Col width={12} md={9} pull={{ md: 3 }}>
-                                <h2>Auto-layout columns</h2>
                                 <h3>[{screenClass}] Equal width</h3>
                                 <CodeBlock code={equalWidth} />
                                 <h3>[{screenClass}] Setting one column width</h3>

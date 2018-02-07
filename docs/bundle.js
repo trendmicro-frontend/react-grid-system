@@ -34980,23 +34980,10 @@ var App = function (_React$Component) {
                         _react2.default.createElement(
                             _src.Row,
                             null,
-                            _react2.default.createElement(
-                                _src.Col,
-                                { width: 12, md: 3, push: { md: 9 } },
-                                _react2.default.createElement(
-                                    'h2',
-                                    null,
-                                    'Sidebar'
-                                )
-                            ),
+                            _react2.default.createElement(_src.Col, { width: 12, md: 3, push: { md: 9 } }),
                             _react2.default.createElement(
                                 _src.Col,
                                 { width: 12, md: 9, pull: { md: 3 } },
-                                _react2.default.createElement(
-                                    'h2',
-                                    null,
-                                    'Auto-layout columns'
-                                ),
                                 _react2.default.createElement(
                                     'h3',
                                     null,
@@ -35097,4 +35084,4 @@ module.exports = "<Container>\n    <Row style={{ justifyContent: 'center' }}>\n 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?00a24f3be11048391820
+//# sourceMappingURL=bundle.js.map?2f2064b135e4558d953d
