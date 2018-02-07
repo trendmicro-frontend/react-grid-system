@@ -1,4 +1,4 @@
-<Container>
+<Container layout="flex">
     <Row>
         <Col>col</Col>
         <Col>col</Col>

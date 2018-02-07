@@ -34847,21 +34847,21 @@ if(false) {
 /***/ "./all-breakpoints.md":
 /***/ (function(module, exports) {
 
-module.exports = "<Container>\n    <Row>\n        <Col>col</Col>\n        <Col>col</Col>\n        <Col>col</Col>\n        <Col>col</Col>\n    </Row>\n    <Row>\n        <Col width={8}>col-8</Col>\n        <Col width={4}>col-4</Col>\n    </Row>\n</Container>\n"
+module.exports = "<Container layout=\"flex\">\n    <Row>\n        <Col>col</Col>\n        <Col>col</Col>\n        <Col>col</Col>\n        <Col>col</Col>\n    </Row>\n    <Row>\n        <Col width={8}>col-8</Col>\n        <Col width={4}>col-4</Col>\n    </Row>\n</Container>\n"
 
 /***/ }),
 
 /***/ "./equal-width-multi-row.md":
 /***/ (function(module, exports) {
 
-module.exports = "<Container>\n    <Row>\n        <Col>col</Col>\n        <Col>col</Col>\n    </Row>\n    <Row>\n        <Col>col</Col>\n        <Col>col</Col>\n    </Row>\n</Container>\n"
+module.exports = "<Container layout=\"flex\">\n    <Row>\n        <Col>col</Col>\n        <Col>col</Col>\n    </Row>\n    <Row>\n        <Col>col</Col>\n        <Col>col</Col>\n    </Row>\n</Container>\n"
 
 /***/ }),
 
 /***/ "./equal-width.md":
 /***/ (function(module, exports) {
 
-module.exports = "<Container>\n    <Row>\n        <Col>1 of 2</Col>\n        <Col>2 of 2</Col>\n    </Row>\n    <Row>\n        <Col>1 of 3</Col>\n        <Col>2 of 3</Col>\n        <Col>3 of 3</Col>\n    </Row>\n</Container>\n"
+module.exports = "<Container layout=\"flex\">\n    <Row>\n        <Col>1 of 2</Col>\n        <Col>2 of 2</Col>\n    </Row>\n    <Row>\n        <Col>1 of 3</Col>\n        <Col>2 of 3</Col>\n        <Col>3 of 3</Col>\n    </Row>\n</Container>\n"
 
 /***/ }),
 
@@ -35058,30 +35058,30 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.get
 /***/ "./mix-and-match.md":
 /***/ (function(module, exports) {
 
-module.exports = "<Container>\n    <Row>\n        <Col xs md={8}>col-md-8</Col>\n        <Col width={6} md={4}>col-6 col-md-4</Col>\n    </Row>\n    <Row>\n        <Col width={6} md={4}>col-6 col-md-4</Col>\n        <Col width={6} md={4}>col-6 col-md-4</Col>\n        <Col width={6} md={4}>col-6 col-md-4</Col>\n    </Row>\n    <Row>\n        <Col width={6}>col-6</Col>\n        <Col width={6}>col-6</Col>\n    </Row>\n</Container>\n"
+module.exports = "<Container layout=\"flex\">\n    <Row>\n        <Col xs md={8}>col-md-8</Col>\n        <Col width={6} md={4}>col-6 col-md-4</Col>\n    </Row>\n    <Row>\n        <Col width={6} md={4}>col-6 col-md-4</Col>\n        <Col width={6} md={4}>col-6 col-md-4</Col>\n        <Col width={6} md={4}>col-6 col-md-4</Col>\n    </Row>\n    <Row>\n        <Col width={6}>col-6</Col>\n        <Col width={6}>col-6</Col>\n    </Row>\n</Container>\n"
 
 /***/ }),
 
 /***/ "./setting-one-column-width.md":
 /***/ (function(module, exports) {
 
-module.exports = "<Container>\n    <Row>\n        <Col>1 of 3</Col>\n        <Col width={6}>2 of 3 (wider)</Col>\n        <Col>3 of 3</Col>\n    </Row>\n    <Row>\n        <Col>1 of 3</Col>\n        <Col width={5}>2 of 3 (wider)</Col>\n        <Col>3 of 3</Col>\n    </Row>\n</Container>\n"
+module.exports = "<Container layout=\"flex\">\n    <Row>\n        <Col>1 of 3</Col>\n        <Col width={6}>2 of 3 (wider)</Col>\n        <Col>3 of 3</Col>\n    </Row>\n    <Row>\n        <Col>1 of 3</Col>\n        <Col width={5}>2 of 3 (wider)</Col>\n        <Col>3 of 3</Col>\n    </Row>\n</Container>\n"
 
 /***/ }),
 
 /***/ "./stacked-to-horizontal.md":
 /***/ (function(module, exports) {
 
-module.exports = "<Container>\n    <Row>\n        <Col sm={8}>col-sm-8</Col>\n        <Col sm={4}>col-sm-4</Col>\n    </Row>\n    <Row>\n        <Col sm>col-sm</Col>\n        <Col sm>col-sm</Col>\n        <Col sm>col-sm</Col>\n    </Row>\n</Container>\n"
+module.exports = "<Container layout=\"flex\">\n    <Row>\n        <Col sm={8}>col-sm-8</Col>\n        <Col sm={4}>col-sm-4</Col>\n    </Row>\n    <Row>\n        <Col sm>col-sm</Col>\n        <Col sm>col-sm</Col>\n        <Col sm>col-sm</Col>\n    </Row>\n</Container>\n"
 
 /***/ }),
 
 /***/ "./variable-width-content.md":
 /***/ (function(module, exports) {
 
-module.exports = "<Container>\n    <Row style={{ justifyContent: 'center' }}>\n        <Col xs lg={2}>1 of 3</Col>\n        <Col width={12} md=\"auto\">Variable width content</Col>\n        <Col xs lg={2}>3 of 3</Col>\n    </Row>\n    <Row>\n        <Col>1 of 3</Col>\n        <Col width={12} md=\"auto\">Variable width content</Col>\n        <Col xs lg={2}>3 of 3</Col>\n    </Row>\n</Container>\n"
+module.exports = "<Container layout=\"flex\">\n    <Row style={{ justifyContent: 'center' }}>\n        <Col xs lg={2}>1 of 3</Col>\n        <Col width={12} md=\"auto\">Variable width content</Col>\n        <Col xs lg={2}>3 of 3</Col>\n    </Row>\n    <Row>\n        <Col>1 of 3</Col>\n        <Col width={12} md=\"auto\">Variable width content</Col>\n        <Col xs lg={2}>3 of 3</Col>\n    </Row>\n</Container>\n"
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?2f2064b135e4558d953d
+//# sourceMappingURL=bundle.js.map?97a8e31884962ca0af62
