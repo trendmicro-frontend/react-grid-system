@@ -4,6 +4,7 @@
   "description": "React Grid System component",
   "main": "lib/index.js",
   "files": [
+    "dist",
     "lib"
   ],
   "scripts": {
