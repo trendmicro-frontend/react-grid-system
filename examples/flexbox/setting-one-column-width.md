@@ -1,4 +1,4 @@
-<Container layout="flex">
+<Container layout="flexbox">
     <Row>
         <Col>1 of 3</Col>
         <Col width={6}>2 of 3 (wider)</Col>

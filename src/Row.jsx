@@ -1,34 +1,55 @@
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import {
+    LAYOUT_FLEXBOX,
+    LAYOUT_FLOATS,
     LAYOUTS,
+    DEFAULT_COLUMNS,
     DEFAULT_GUTTER_WIDTH,
     DEFAULT_LAYOUT
 } from './constants';
+import styles from './index.styl';
 
 class Row extends PureComponent {
     static propTypes = {
+        // The number of columns.
+        columns: PropTypes.number,
+
         // The horizontal padding (called gutter) between two columns.
         gutterWidth: PropTypes.number,
 
-        // The grid system layout. One of: 'float', 'flex'
+        // The grid system layout.
         layout: PropTypes.oneOf(LAYOUTS)
     };
 
     static contextTypes = {
+        columns: PropTypes.number,
         gutterWidth: PropTypes.number,
         layout: PropTypes.oneOf(LAYOUTS)
     };
 
     static childContextTypes = {
+        columns: PropTypes.number,
         gutterWidth: PropTypes.number,
         layout: PropTypes.oneOf(LAYOUTS)
     };
 
     getChildContext = () => ({
+        columns: this.columns,
         gutterWidth: this.gutterWidth,
         layout: this.layout
     });
+
+    get columns() {
+        if (this.props.columns > 0) {
+            return this.props.columns;
+        }
+        if (this.context.columns > 0) {
+            return this.context.columns;
+        }
+        return DEFAULT_COLUMNS;
+    }
 
     get gutterWidth() {
         if (this.props.gutterWidth >= 0) {
@@ -41,10 +62,11 @@ class Row extends PureComponent {
     }
 
     get layout() {
-        return this.props.layout || this.context.layout || DEFAULT_LAYOUT;
+        const layout = this.props.layout || this.context.layout;
+        return (LAYOUTS.indexOf(layout) >= 0) ? layout : DEFAULT_LAYOUT;
     }
 
-    get floatStyle() {
+    get style() {
         const gutterWidth = this.gutterWidth;
         const style = {
             marginLeft: -(gutterWidth / 2),
@@ -54,35 +76,11 @@ class Row extends PureComponent {
         return style;
     }
 
-    get flexStyle() {
-        const gutterWidth = this.gutterWidth;
-        const style = {
-            marginLeft: -(gutterWidth / 2),
-            marginRight: -(gutterWidth / 2),
-            display: 'flex',
-            flexWrap: 'wrap',
-            flexGrow: 0,
-            flexShrink: 0
-        };
-
-        return style;
-    }
-
-    get style() {
-        const layout = this.layout;
-        if (layout === 'float') {
-            return this.floatStyle;
-        }
-        if (layout === 'flex') {
-            return this.flexStyle;
-        }
-        return this.floatStyle;
-    }
-
     render() {
         const {
             gutterWidth, // eslint-disable-line
             layout, // eslint-disable-line
+            className,
             style,
             children,
             ...props
@@ -91,6 +89,10 @@ class Row extends PureComponent {
         return (
             <div
                 {...props}
+                className={cx(className, {
+                    [styles.flexboxRow]: this.layout === LAYOUT_FLEXBOX,
+                    [styles.floatsRow]: this.layout === LAYOUT_FLOATS
+                })}
                 style={{
                     ...this.style,
                     ...style

@@ -21,8 +21,8 @@ class Provider extends React.Component {
         // The horizontal padding (called gutter) between two columns. A gutter width of 30 means 15px on each side of a column.
         gutterWidth: PropTypes.number,
 
-        // The grid system layout. One of: 'float', 'flex'
-        layout: PropTypes.oneOf(['float', 'flex'])
+        // The grid system layout. One of: 'floats', 'flexbox'
+        layout: PropTypes.oneOf(['floats', 'flexbox'])
     };
 
     static defaultProps = {
@@ -30,7 +30,7 @@ class Provider extends React.Component {
         containerWidths: DEFAULT_CONTAINER_WIDTHS,
         columns: DEFAULT_COLUMNS,
         gutterWidth: DEFAULT_GUTTER_WIDTH,
-        layout: 'float'
+        layout: 'floats'
     };
 
     static childContextTypes = {
@@ -38,7 +38,7 @@ class Provider extends React.Component {
         containerWidths: PropTypes.arrayOf(PropTypes.number),
         columns: PropTypes.number,
         gutterWidth: PropTypes.number,
-        layout: PropTypes.oneOf(['float', 'flex'])
+        layout: PropTypes.oneOf(['floats', 'flexbox'])
     };
 
     getChildContext = () => ({

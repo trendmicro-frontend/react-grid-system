@@ -1,13 +1,19 @@
+import cx from 'classnames';
 import ensureArray from 'ensure-array';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import throttle from 'lodash.throttle';
 import { getScreenClass } from './utils';
 import {
+    LAYOUT_FLEXBOX,
+    LAYOUT_FLOATS,
     LAYOUTS,
     DEFAULT_CONTAINER_WIDTHS,
-    DEFAULT_GUTTER_WIDTH
+    DEFAULT_COLUMNS,
+    DEFAULT_GUTTER_WIDTH,
+    DEFAULT_LAYOUT
 } from './constants';
+import styles from './index.styl';
 
 class Container extends PureComponent {
     static propTypes = {
@@ -38,10 +44,13 @@ class Container extends PureComponent {
         // True makes container fluid only in xxl, not present means fluid everywhere.
         xxl: PropTypes.bool,
 
-        // The horizontal padding (called gutter) between two columns. A gutter width of 30 means 15px on each side of a column.
+        // The number of columns.
+        columns: PropTypes.number,
+
+        // The horizontal padding (called gutter) between two columns.
         gutterWidth: PropTypes.number,
 
-        // The grid system layout. One of: 'float', 'flex'
+        // The grid system layout.
         layout: PropTypes.oneOf(LAYOUTS),
 
         // A callback fired when the resize event occurs.
@@ -61,19 +70,32 @@ class Container extends PureComponent {
     static contextTypes = {
         breakpoints: PropTypes.arrayOf(PropTypes.number),
         containerWidths: PropTypes.arrayOf(PropTypes.number),
+        columns: PropTypes.number,
         gutterWidth: PropTypes.number,
         layout: PropTypes.oneOf(LAYOUTS)
     };
 
     static childContextTypes = {
+        columns: PropTypes.number,
         gutterWidth: PropTypes.number,
         layout: PropTypes.oneOf(LAYOUTS)
     };
 
     getChildContext = () => ({
+        columns: this.columns,
         gutterWidth: this.gutterWidth,
         layout: this.layout
     });
+
+    get columns() {
+        if (this.props.columns > 0) {
+            return this.props.columns;
+        }
+        if (this.context.columns > 0) {
+            return this.context.columns;
+        }
+        return DEFAULT_COLUMNS;
+    }
 
     get gutterWidth() {
         if (this.props.gutterWidth >= 0) {
@@ -86,16 +108,13 @@ class Container extends PureComponent {
     }
 
     get layout() {
-        return this.props.layout || this.context.layout;
+        const layout = this.props.layout || this.context.layout;
+        return (LAYOUTS.indexOf(layout) >= 0) ? layout : DEFAULT_LAYOUT;
     }
 
     get style() {
         const gutterWidth = this.gutterWidth;
         const style = {
-            boxSizing: 'border-box',
-            position: 'relative',
-            marginLeft: 'auto',
-            marginRight: 'auto',
             paddingLeft: gutterWidth / 2,
             paddingRight: gutterWidth / 2
         };
@@ -130,11 +149,11 @@ class Container extends PureComponent {
     }
 
     setScreenClass = () => {
-        this.setState(state => ({
-            screenClass: getScreenClass({ breakpoints: this.context.breakpoints })
-        }), () => {
+        const screenClass = getScreenClass({ breakpoints: this.context.breakpoints });
+
+        this.setState({ screenClass: screenClass }, () => {
             if (typeof this.props.onResize === 'function') {
-                this.props.onResize({ screenClass: this.state.screenClass });
+                this.props.onResize({ screenClass: screenClass });
             }
         });
     };
@@ -142,10 +161,12 @@ class Container extends PureComponent {
     componentWillMount() {
         this.setScreenClass();
     }
+
     componentDidMount() {
         this.eventListener = throttle(this.setScreenClass, Math.floor(1000 / 60)); // 60Hz
         window.addEventListener('resize', this.eventListener);
     }
+
     componentWillUnmount() {
         if (this.eventListener) {
             this.eventListener.cancel();
@@ -153,6 +174,7 @@ class Container extends PureComponent {
             this.eventListener = null;
         }
     }
+
     render() {
         const {
             fluid, // eslint-disable-line
@@ -160,6 +182,7 @@ class Container extends PureComponent {
             gutterWidth, // eslint-disable-line
             layout, // eslint-disable-line
             onResize, // eslint-disable-line
+            className,
             style,
             children,
             ...props
@@ -168,6 +191,10 @@ class Container extends PureComponent {
         return (
             <div
                 {...props}
+                className={cx(className, {
+                    [styles.flexboxContainer]: this.layout === LAYOUT_FLEXBOX,
+                    [styles.floatsContainer]: this.layout === LAYOUT_FLOATS
+                })}
                 style={{
                     ...this.style,
                     ...style

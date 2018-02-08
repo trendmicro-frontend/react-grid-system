@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Markdown from 'react-markdown';
 import Parser from 'react-jsx-parser';
@@ -9,6 +10,12 @@ import {
     Col as _Col
 } from '../src';
 
+const Comment = (props) => null;
+
+const Row = styled(_Row)`
+    margin-bottom: 1rem;
+`;
+
 const Col = styled(_Col)`
     padding-top: .75rem;
     padding-bottom: .75rem;
@@ -16,18 +23,20 @@ const Col = styled(_Col)`
     border: 1px solid rgba(86,61,124,.2);
 `;
 
-const Row = styled(_Row)`
-    margin-bottom: 1rem;
-`;
-
-export default (props) => (
-    <div>
+const Code = ({ code, ...props }) => (
+    <div {...props}>
         <Parser
-            components={{ Provider, Container, Row, Col }}
-            jsx={props.code}
+            components={{ Comment, Provider, Container, Row, Col }}
+            jsx={code}
         />
         <div style={{ width: '100%' }}>
-            <Markdown source={'```jsx\n' + props.code + '\n```'} />
+            <Markdown source={'```jsx\n' + code + '\n```'} />
         </div>
     </div>
 );
+
+Code.propTypes = {
+    code: PropTypes.string
+};
+
+export default Code;

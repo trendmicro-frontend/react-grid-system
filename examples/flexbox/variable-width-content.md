@@ -1,4 +1,4 @@
-<Container layout="flex">
+<Container layout="flexbox">
     <Row style={{ justifyContent: 'center' }}>
         <Col xs lg={2}>1 of 3</Col>
         <Col width={12} md="auto">Variable width content</Col>
