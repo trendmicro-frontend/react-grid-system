@@ -30,6 +30,8 @@ import flexboxColumnBreaks from './flexbox/column-breaks.md';
 import flexboxOffsettingColumns from './flexbox/offsetting-columns.md';
 import flexboxAutoMargin from './flexbox/auto-margin.md';
 import flexboxNesting from './flexbox/nesting.md';
+import visible from './visible.md';
+import hidden from './hidden.md';
 import { Provider, Container, Row, Col } from '../src';
 
 const LayoutHeading = styled.h2`
@@ -189,6 +191,17 @@ class App extends React.Component {
                                     <h3>Example: Nesting</h3>
                                     <div>screenClass={screenClass}</div>
                                     <CodeBlock code={flexboxNesting} />
+                                </Example>
+                                <LayoutHeading>Responsive Utilities</LayoutHeading>
+                                <Example>
+                                    <h3>Example: Visible</h3>
+                                    <div>screenClass={screenClass}</div>
+                                    <CodeBlock code={visible} />
+                                </Example>
+                                <Example>
+                                    <h3>Example: Hidden</h3>
+                                    <div>screenClass={screenClass}</div>
+                                    <CodeBlock code={hidden} />
                                 </Example>
                             </Col>
                         </Row>

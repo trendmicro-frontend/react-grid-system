@@ -7,7 +7,9 @@ import {
     Provider,
     Container,
     Row as _Row,
-    Col as _Col
+    Col as _Col,
+    Visible,
+    Hidden
 } from '../src';
 
 const Comment = (props) => null;
@@ -26,7 +28,7 @@ const Col = styled(_Col)`
 const Code = ({ code, ...props }) => (
     <div {...props}>
         <Parser
-            components={{ Comment, Provider, Container, Row, Col }}
+            components={{ Comment, Provider, Container, Row, Col, Visible, Hidden }}
             jsx={code}
         />
         <div style={{ width: '100%' }}>

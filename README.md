@@ -106,6 +106,40 @@ You can wrap `<Container />`, `<Row />`, and `<Col />` in `<Provider />` to pass
 </Provider>
 ```
 
+### Visible Component
+
+```jsx
+<Visible xs>
+    Visible on extra small
+</Visible>
+<Visible sm>
+    Visible on small
+</Visible>
+<Visible md>
+    Visible on medium
+</Visible>
+<Visible lg>
+    Visible on large
+</Visible>
+<Visible xl>
+    Visible on extra large
+</Visible>
+<Visible xxl>
+    Visible on double extra large
+</Visible>
+```
+
+### Hidden Component
+
+```jsx
+<Hidden xs sm>
+    Hidden on extra small and small
+</Hidden>
+<Hidden md lg>
+    Hidden on medium and large
+</Hidden>
+```
+
 ## API
 
 ### Properties
@@ -114,8 +148,8 @@ You can wrap `<Container />`, `<Row />`, and `<Col />` in `<Provider />` to pass
 
 Name | Type | Default | Description 
 :--- | :--- | :------ | :----------
-breakpoints | Number[] | [576, 768, 992, 1200, 0] | The breakpoints (minimum width) of devices in screen class sm, md, lg, xl, and xxl.
-containerWidths | Number[] | [540, 720, 960, 1140, 0] | The container widths in pixels of devices in screen class sm, md, lg, xl, and xxl.
+breakpoints | Number[] | [576, 768, 992, 1200, 0] | The breakpoints (minimum width) of devices in screen class `sm`, `md`, `lg`, `xl`, and `xxl`.
+containerWidths | Number[] | [540, 720, 960, 1140, 0] | The container widths in pixels of devices in screen class `sm`, `md`, `lg`, `xl`, and `xxl`.
 columns | Number | 12 | The number of columns.
 gutterWidth | Number | 30 | The horizontal padding (called gutter) between two columns. A gutter width of 30 means 15px on each side of a column.
 layout | One of:<br>'floats'<br>'flexbox' | 'floats' | The grid system layout.
@@ -125,12 +159,12 @@ layout | One of:<br>'floats'<br>'flexbox' | 'floats' | The grid system layout.
 Name | Type | Default | Description 
 :--- | :--- | :------ | :----------
 fluid | Boolean | false | True makes the container full-width, false fixed-width.
-xs | Boolean | false | True makes container fluid only in xs, not present means fluid everywhere.
-sm | Boolean | false | True makes container fluid only in sm, not present means fluid everywhere.
-md | Boolean | false | True makes container fluid only in md, not present means fluid everywhere.
-lg | Boolean | false | True makes container fluid only in lg, not present means fluid everywhere.
-xl | Boolean | false | True makes container fluid only in xl, not present means fluid everywhere.
-xxl | Boolean | false | True makes container fluid only in xxl, not present means fluid everywhere.
+xs | Boolean | false | True makes container fluid only in `xs`, not present means fluid everywhere.
+sm | Boolean | false | True makes container fluid only in `sm`, not present means fluid everywhere.
+md | Boolean | false | True makes container fluid only in `md`, not present means fluid everywhere.
+lg | Boolean | false | True makes container fluid only in `lg`, not present means fluid everywhere.
+xl | Boolean | false | True makes container fluid only in `xl`, not present means fluid everywhere.
+xxl | Boolean | false | True makes container fluid only in `xxl`, not present means fluid everywhere.
 columns | Number | 12 | The number of columns.
 gutterWidth | Number | 30 | The horizontal padding (called gutter) between two columns. A gutter width of 30 means 15px on each side of a column.
 layout | One of:<br>'floats'<br>'flexbox' | 'floats' | The grid system layout.
@@ -148,13 +182,13 @@ layout | One of:<br>'floats'<br>'flexbox' | 'floats' | The grid system layout.
 
 Name | Type | Default | Description 
 :--- | :--- | :------ | :----------
-width | Number or 'auto' | | The width of the column for all screen classes.
-xs | Boolean, Number or 'auto' | | The width of the column for screen class `xs`.
-sm | Boolean, Number or 'auto' | | The width of the column for screen class `sm`.
-md | Boolean, Number or 'auto' | | The width of the column for screen class `md`.
-lg | Boolean, Number or 'auto' | | The width of the column for screen class `lg`.
-xl | Boolean, Number or 'auto' | | The width of the column for screen class `xl`.
-xxl | Boolean, Number or 'auto' | | The width of the column for screen class `xxl`.
+width | Number or 'auto' | | The width of the column for all screen classes.<br>Note: 'auto' is only supported with the flexbox layout.
+xs | Number, Boolean or 'auto' | | The width of the column for screen class `xs`.<br>Note: 'auto' and _true_ are only supported with the flexbox layout.
+sm | Number, Boolean or 'auto' | | The width of the column for screen class `sm`.<br>Note: 'auto' and _true_ are only supported with the flexbox layout.
+md | Number, Boolean or 'auto' | | The width of the column for screen class `md`.<br>Note: 'auto' and _true_ are only supported with the flexbox layout.
+lg | Number, Boolean or 'auto' | | The width of the column for screen class `lg`.<br>Note: 'auto' and _true_ are only supported with the flexbox layout.
+xl | Number, Boolean or 'auto' | | The width of the column for screen class `xl`.<br>Note: 'auto' and _true_ are only supported with the flexbox layout.
+xxl | Number, Boolean or 'auto' | | The width of the column for screen class `xxl`.<br>Note: 'auto' and _true_ are only supported with the flexbox layout.
 offset | { xs, sm, md, lg, xl, xxl } | | The offset of this column for all screen classes.
 pull | { xs, sm, md, lg, xl, xxl } | | The amount this column is pulled to the left for all screen classes.
 push | { xs, sm, md, lg, xl, xxl } | | The amount this column is pushed to the right for all screen classes.
