@@ -19,9 +19,8 @@ Demo: https://trendmicro-frontend.github.io/react-grid-system
   ```js
   import {
       Provider as GridSystemProvider,
-      Container,
-      Row,
-      Col
+      Container, Row, Col,
+      Visible, Hidden
   } from '@trendmicro/react-grid-system';
 
   // Be sure to include styles at some point, probably during your bootstraping
@@ -41,20 +40,18 @@ components/
 ```jsx
 import '@trendmicro/react-grid-system/dist/react-grid-system.css';
 export {
-    Provider,
-    Container,
-    Row,
-    Col
+      Provider,
+      Container, Row, Col,
+      Visible, Hidden
 } from '@trendmicro/react-grid-system';
 ```
 
 Then, import components like below:
 ```jsx
 import {
-    Provider as GridSystemProvider,
-    Container,
-    Row,
-    Col
+      Provider as GridSystemProvider,
+      Container, Row, Col,
+      Visible, Hidden
 } from './components/GridSystem';
 ```
 
@@ -106,7 +103,7 @@ You can wrap `<Container />`, `<Row />`, and `<Col />` in `<Provider />` to pass
 </Provider>
 ```
 
-### Visible Component
+### Visible
 
 ```jsx
 <Visible xs>
@@ -129,7 +126,7 @@ You can wrap `<Container />`, `<Row />`, and `<Col />` in `<Provider />` to pass
 </Visible>
 ```
 
-### Hidden Component
+### Hidden
 
 ```jsx
 <Hidden xs sm>
@@ -192,6 +189,30 @@ xxl | Number, Boolean or 'auto' | | The width of the column for screen class `xx
 offset | { xs, sm, md, lg, xl, xxl } | | The offset of this column for all screen classes.
 pull | { xs, sm, md, lg, xl, xxl } | | The amount this column is pulled to the left for all screen classes.
 push | { xs, sm, md, lg, xl, xxl } | | The amount this column is pushed to the right for all screen classes.
+
+#### Visible
+
+Name | Type | Default | Description 
+:--- | :--- | :------ | :----------
+xs | Boolean | false | Visible on extra small devices.
+sm | Boolean | false | Visible on small devices. 
+md | Boolean | false | Visible on medimum devices.
+lg | Boolean | false | Visible on large devices.
+xl | Boolean | false | Visible on extra large devices.
+xxl | Boolean | false | Visible on double extra large devices.
+onResize | Function({ screenClass }) | | A callback fired when the resize event occurs.
+
+#### Hidden
+
+Name | Type | Default | Description 
+:--- | :--- | :------ | :----------
+xs | Boolean | false | Hidden on extra small devices.
+sm | Boolean | false | Hidden on small devices. 
+md | Boolean | false | Hidden on medimum devices.
+lg | Boolean | false | Hidden on large devices.
+xl | Boolean | false | Hidden on extra large devices.
+xxl | Boolean | false | Hidden on double extra large devices.
+onResize | Function({ screenClass }) | | A callback fired when the resize event occurs.
 
 ## License
 
