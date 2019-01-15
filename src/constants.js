@@ -48,4 +48,4 @@ export const DEFAULT_COLUMNS = 12;
 export const DEFAULT_GUTTER_WIDTH = 30;
 
 // The default grid system layout.
-export const DEFAULT_LAYOUT = LAYOUT_FLOATS;
+export const DEFAULT_LAYOUT = LAYOUT_FLEXBOX;

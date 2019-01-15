@@ -30,7 +30,7 @@ class Provider extends React.Component {
         containerWidths: DEFAULT_CONTAINER_WIDTHS,
         columns: DEFAULT_COLUMNS,
         gutterWidth: DEFAULT_GUTTER_WIDTH,
-        layout: 'floats'
+        layout: 'flexbox',
     };
 
     static childContextTypes = {
