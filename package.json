@@ -1,6 +1,6 @@
 {
   "name": "@trendmicro/react-grid-system",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "React Grid System component",
   "main": "lib/index.js",
   "files": [

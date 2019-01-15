@@ -1,4 +1,4 @@
-/*! react-grid-system v0.2.0 | (c) 2018 Trend Micro Inc. | MIT | https://github.com/trendmicro-frontend/react-grid-system */
+/*! react-grid-system v1.0.0 | (c) 2019 Trend Micro Inc. | MIT | https://github.com/trendmicro-frontend/react-grid-system */
 /**
  * Container
  */
@@ -72,5 +72,6 @@
   width: 100%;
   min-height: 1px;
 }
+
 
 /*# sourceMappingURL=react-grid-system.css.map*/
