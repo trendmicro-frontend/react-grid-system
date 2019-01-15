@@ -1,0 +1,12 @@
+[class^="flexbox-row-"] > [class^="flexbox-col-"],
+[class^="floats-row-"] > [class^="floats-col-"] {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    background-color: rgba(86, 61, 124, .15);
+    border: 1px solid rgba(86, 61, 124, .2);
+}
+
+[class^="flexbox-row-"] + [class^="flexbox-row-"],
+[class^="floats-row-"] + [class^="floats-row-"] {
+    margin-top: 1rem;
+}
