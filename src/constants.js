@@ -30,7 +30,7 @@ export const LAYOUT_FLEXBOX = 'flexbox';
 export const LAYOUT_FLOATS = 'floats';
 export const LAYOUTS = [
     LAYOUT_FLEXBOX,
-    LAYOUT_FLOATS
+    LAYOUT_FLOATS,
 ];
 
 export const SCREEN_CLASSES = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];

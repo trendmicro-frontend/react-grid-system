@@ -1,17 +1,12 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import throttle from 'lodash.throttle';
-import { getScreenClass } from './utils';
 import {
     LAYOUT_FLEXBOX,
     LAYOUT_FLOATS,
-    LAYOUTS,
     SCREEN_CLASSES,
-    DEFAULT_COLUMNS,
-    DEFAULT_GUTTER_WIDTH,
-    DEFAULT_LAYOUT
 } from './constants';
+import { ConfigurationContext, ScreenClassContext } from './context';
 import styles from './index.styl';
 
 const flexboxAutoprefixer = (style) => Object.keys(style).reduce((obj, key) => {
@@ -39,7 +34,7 @@ const flexboxAutoprefixer = (style) => Object.keys(style).reduce((obj, key) => {
     return obj;
 }, {});
 
-const getWidth = (width, columns = DEFAULT_COLUMNS) => {
+const getWidth = (width, columns) => {
     if (width === 'auto') {
         return width;
     }
@@ -52,7 +47,7 @@ const getWidth = (width, columns = DEFAULT_COLUMNS) => {
 
     columns = Math.floor(columns);
     if (columns <= 0) {
-        columns = DEFAULT_COLUMNS;
+        columns = 1;
     }
 
     const colWidth = Math.max(0, Math.min(columns, width));
@@ -149,35 +144,7 @@ class Col extends PureComponent {
         pull: {}
     };
 
-    static contextTypes = {
-        breakpoints: PropTypes.arrayOf(PropTypes.number),
-        columns: PropTypes.number,
-        gutterWidth: PropTypes.number,
-        layout: PropTypes.oneOf(LAYOUTS)
-    };
-
-    get columns() {
-        if (this.context.columns > 0) {
-            return this.context.columns;
-        }
-        return DEFAULT_COLUMNS;
-    }
-
-    get gutterWidth() {
-        if (this.context.gutterWidth >= 0) {
-            return this.context.gutterWidth;
-        }
-        return DEFAULT_GUTTER_WIDTH;
-    }
-
-    get layout() {
-        const layout = this.context.layout;
-        return (LAYOUTS.indexOf(layout) >= 0) ? layout : DEFAULT_LAYOUT;
-    }
-
-    get floatsStyle() {
-        const columns = this.columns;
-        const gutterWidth = this.gutterWidth;
+    getFloatsStyle = ({ columns, gutterWidth, screenClass }) => {
         const style = {
             paddingLeft: gutterWidth / 2,
             paddingRight: gutterWidth / 2
@@ -196,7 +163,6 @@ class Col extends PureComponent {
             xxl: this.props.xxl
         };
         const { offset, push, pull } = this.props;
-        const { screenClass } = this.state;
         const screenClasses = SCREEN_CLASSES;
         screenClasses.forEach((size, index) => {
             if (screenClasses.indexOf(screenClass) < index) {
@@ -210,11 +176,9 @@ class Col extends PureComponent {
         });
 
         return style;
-    }
+    };
 
-    get flexboxStyle() {
-        const columns = this.columns;
-        const gutterWidth = this.gutterWidth;
+    getFlexboxStyle = ({ columns, gutterWidth, screenClass }) => {
         const style = {
             paddingLeft: gutterWidth / 2,
             paddingRight: gutterWidth / 2,
@@ -243,7 +207,6 @@ class Col extends PureComponent {
             xxl: this.props.xxl
         };
         const { offset, push, pull } = this.props;
-        const { screenClass } = this.state;
         const screenClasses = SCREEN_CLASSES;
         screenClasses.forEach((size, index) => {
             if (screenClasses.indexOf(screenClass) < index) {
@@ -275,41 +238,7 @@ class Col extends PureComponent {
         }
 
         return flexboxAutoprefixer(style);
-    }
-
-    get style() {
-        const layout = this.layout;
-        if (layout === LAYOUT_FLOATS) {
-            return this.floatsStyle;
-        }
-        if (layout === LAYOUT_FLEXBOX) {
-            return this.flexboxStyle;
-        }
-        return this.floatsStyle;
-    }
-
-    setScreenClass = () => {
-        this.setState(state => ({
-            screenClass: getScreenClass({ breakpoints: this.context.breakpoints })
-        }));
     };
-
-    componentWillMount() {
-        this.setScreenClass();
-    }
-
-    componentDidMount() {
-        this.eventListener = throttle(this.setScreenClass, Math.floor(1000 / 60)); // 60Hz
-        window.addEventListener('resize', this.eventListener);
-    }
-
-    componentWillUnmount() {
-        if (this.eventListener) {
-            this.eventListener.cancel();
-            window.removeEventListener('resize', this.eventListener);
-            this.eventListener = null;
-        }
-    }
 
     render() {
         const {
@@ -322,19 +251,38 @@ class Col extends PureComponent {
         } = this.props;
 
         return (
-            <div
-                {...props}
-                className={cx(className, {
-                    [styles.flexboxCol]: this.layout === LAYOUT_FLEXBOX,
-                    [styles.floatsCol]: this.layout === LAYOUT_FLOATS
-                })}
-                style={{
-                    ...this.style,
-                    ...style
-                }}
-            >
-                {children}
-            </div>
+            <ConfigurationContext.Consumer>
+                {config => (
+                    <ScreenClassContext.Consumer>
+                        {screenClass => {
+                            const { columns, gutterWidth, layout } = config;
+                            let colStyle = {};
+                            if (layout === LAYOUT_FLEXBOX) {
+                                colStyle = this.getFlexboxStyle({ columns, gutterWidth, screenClass });
+                            }
+                            if (layout === LAYOUT_FLOATS) {
+                                colStyle = this.getFloatsStyle({ columns, gutterWidth, screenClass });
+                            }
+
+                            return (
+                                <div
+                                    {...props}
+                                    className={cx(className, {
+                                        [styles.flexboxCol]: layout === LAYOUT_FLEXBOX,
+                                        [styles.floatsCol]: layout === LAYOUT_FLOATS
+                                    })}
+                                    style={{
+                                        ...colStyle,
+                                        ...style
+                                    }}
+                                >
+                                    {children}
+                                </div>
+                            );
+                        }}
+                    </ScreenClassContext.Consumer>
+                )}
+            </ConfigurationContext.Consumer>
         );
     }
 }

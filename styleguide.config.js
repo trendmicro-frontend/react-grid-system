@@ -92,24 +92,19 @@ const webpackConfig = {
 };
 
 module.exports = {
-    title: 'React Grid System',
-    require: [
-        '@babel/polyfill',
-        path.resolve(__dirname, 'styleguide/setup.js'),
-        path.resolve(__dirname, 'styleguide/styles.css'),
-    ],
+    title: `React Grid System v${pkg.version}`,
     sections: [
         {
-            name: 'Flexbox',
-            content: path.resolve(__dirname, 'styleguide/flexbox/README.md'),
+            name: 'Layout: Flexbox',
+            content: path.resolve(__dirname, 'styleguide/flexbox/README.md')
         },
         {
-            name: 'Floats',
-            content: path.resolve(__dirname, 'styleguide/floats/README.md'),
+            name: 'Layout: Floats',
+            content: path.resolve(__dirname, 'styleguide/floats/README.md')
         },
         {
             name: 'Responsive Utilities',
-            content: path.resolve(__dirname, 'styleguide/responsive-utilities/README.md'),
+            content: path.resolve(__dirname, 'styleguide/responsive-utilities/README.md')
         },
         {
             name: 'Components',
@@ -120,8 +115,13 @@ module.exports = {
                 'Col',
                 'Hidden',
                 'Visible'
-            ].map(c => path.resolve(__dirname, `src/${c}.jsx`)),
+            ].map(c => path.resolve(__dirname, `src/${c}.jsx`))
         }
+    ],
+    require: [
+        '@babel/polyfill',
+        path.resolve(__dirname, 'styleguide/setup.js'),
+        path.resolve(__dirname, 'styleguide/styles.css')
     ],
     ribbon: {
         url: pkg.homepage,
@@ -131,6 +131,9 @@ module.exports = {
     exampleMode: 'expand',
     usageMode: 'expand',
     showSidebar: true,
+    styleguideComponents: {
+        Wrapper: path.resolve(__dirname, 'styleguide/Wrapper.jsx'),
+    },
     styleguideDir: 'docs/',
     webpackConfig: webpackConfig
 };

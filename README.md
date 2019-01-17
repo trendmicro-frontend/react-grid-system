@@ -81,10 +81,10 @@ You can wrap `<Container />`, `<Row />`, and `<Col />` in `<Provider />` to pass
 
 ```jsx
 <Provider
-    breakpoints={[576, 768, 992, 1200]}
-    containerWidths={[540, 720, 960, 1140]}
+    breakpoints={[576, 768, 992, 1200, 1600]}
+    containerWidths={[540, 720, 960, 1140, 1440]}
     columns={12}
-    gutterWidth={20}
+    gutterWidth={0}
     layout="flexbox"
 >
     <Container>
@@ -149,7 +149,7 @@ breakpoints | Number[] | [576, 768, 992, 1200, 0] | The breakpoints (minimum wid
 containerWidths | Number[] | [540, 720, 960, 1140, 0] | The container widths in pixels of devices in screen class `sm`, `md`, `lg`, `xl`, and `xxl`.
 columns | Number | 12 | The number of columns.
 gutterWidth | Number | 30 | The horizontal padding (called gutter) between two columns. A gutter width of 30 means 15px on each side of a column.
-layout | One of:<br>'floats'<br>'flexbox' | 'floats' | The grid system layout.
+layout | One of:<br>'flexbox'<br>'floats' | 'flexbox' | The grid system layout.
 
 #### Container
 
@@ -162,18 +162,14 @@ md | Boolean | false | True makes container fluid only in `md`, not present mean
 lg | Boolean | false | True makes container fluid only in `lg`, not present means fluid everywhere.
 xl | Boolean | false | True makes container fluid only in `xl`, not present means fluid everywhere.
 xxl | Boolean | false | True makes container fluid only in `xxl`, not present means fluid everywhere.
-columns | Number | 12 | The number of columns.
-gutterWidth | Number | 30 | The horizontal padding (called gutter) between two columns. A gutter width of 30 means 15px on each side of a column.
-layout | One of:<br>'floats'<br>'flexbox' | 'floats' | The grid system layout.
-onResize | Function({ screenClass }) | | A callback fired when the resize event occurs.
+columns | Number | inherited | The number of columns.
+gutterWidth | Number | inherited | The horizontal padding (called gutter) between two columns. A gutter width of 30 means 15px on each side of a column.
+layout | One of:<br>'flexbox'<br>'floats' | inherited | The grid system layout.
 
 #### Row
 
 Name | Type | Default | Description 
 :--- | :--- | :------ | :----------
-columns | Number | 12 | The number of columns.
-gutterWidth | Number | 30 | The horizontal padding (called gutter) between two columns. A gutter width of 30 means 15px on each side of a column.
-layout | One of:<br>'floats'<br>'flexbox' | 'floats' | The grid system layout.
 
 #### Col
 
@@ -200,7 +196,6 @@ md | Boolean | false | Visible on medimum devices.
 lg | Boolean | false | Visible on large devices.
 xl | Boolean | false | Visible on extra large devices.
 xxl | Boolean | false | Visible on double extra large devices.
-onResize | Function({ screenClass }) | | A callback fired when the resize event occurs.
 
 #### Hidden
 
@@ -212,7 +207,6 @@ md | Boolean | false | Hidden on medimum devices.
 lg | Boolean | false | Hidden on large devices.
 xl | Boolean | false | Hidden on extra large devices.
 xxl | Boolean | false | Hidden on double extra large devices.
-onResize | Function({ screenClass }) | | A callback fired when the resize event occurs.
 
 ## License
 
