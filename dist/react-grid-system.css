@@ -2,6 +2,11 @@
 /**
  * Container
  */
+.grid-system---flexbox-container---3Fao- {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
 .grid-system---floats-container---ucGke {
   zoom: 1;
   position: relative;
@@ -15,11 +20,6 @@
 }
 .grid-system---floats-container---ucGke:after {
   clear: both;
-}
-.grid-system---flexbox-container---3Fao- {
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
 }
 /**
  * Row
