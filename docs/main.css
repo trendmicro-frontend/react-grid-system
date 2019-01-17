@@ -1,6 +1,11 @@
 /**
  * Container
  */
+.flexbox-container---3Fao- {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
 .floats-container---ucGke {
   zoom: 1;
   position: relative;
@@ -14,11 +19,6 @@
 }
 .floats-container---ucGke:after {
   clear: both;
-}
-.flexbox-container---3Fao- {
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
 }
 /**
  * Row
