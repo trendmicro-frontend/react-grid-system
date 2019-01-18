@@ -1,8 +1,8 @@
 ### Custom columns
 
 ```jsx
-<Container layout="floats">
-    <Row columns={20}>
+<Container fluid columns={20} layout="floats">
+    <Row>
         <Col sm={5} md={4} xl={2}>col</Col>
         <Col sm={5} md={4} xl={2}>col</Col>
         <Col sm={5} md={4} xl={2}>col</Col>
@@ -17,7 +17,7 @@
 ### Stacked to horizontal
 
 ```jsx
-<Container layout="floats">
+<Container fluid layout="floats">
     <Row>
         <Col md={1}>col-md-1</Col>
         <Col md={1}>col-md-1</Col>
@@ -51,7 +51,7 @@
 ### Mobile and desktop
 
 ```jsx
-<Container layout="floats">
+<Container fluid layout="floats">
     <Fragment>
         Stack the columns on mobile by making one full-width and the other half-width
     </Fragment>
@@ -80,7 +80,7 @@
 ### Mobile, tablet, desktops
 
 ```jsx
-<Container layout="floats">
+<Container fluid layout="floats">
     <Row>
         <Col xs={12} sm={6} md={8}>col-xs-12 col-sm-6 col-md-8</Col>
         <Col xs={6} sm={6} md={4}>col-xs-6 col-sm-6 col-md-4</Col>
@@ -96,7 +96,7 @@
 ### Responsive column resets
 
 ```jsx
-<Container layout="floats">
+<Container fluid layout="floats">
     <Row>
         <Col sm={5} md={6}>col-sm-5 col-md-6</Col>
         <Col sm={5} md={6} offset={{ sm: 2, md: 0 }}>col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0</Col>
@@ -111,7 +111,7 @@
 ### Offsetting columns
 
 ```jsx
-<Container layout="floats">
+<Container fluid layout="floats">
     <Row>
         <Col md={4}>col-md-4</Col>
         <Col md={4} offset={{ md: 4 }}>col-md-4 col-md-offset-4</Col>
@@ -129,7 +129,7 @@
 ### Nesting columns
 
 ```jsx
-<Container layout="floats">
+<Container fluid layout="floats">
     <Row>
         <Col md={9}>
             Level 1: col-md-9
@@ -149,7 +149,7 @@
 ### Column ordering
 
 ```jsx
-<Container layout="floats">
+<Container fluid layout="floats">
     <Row>
         <Col md={9} push={{ md: 3 }}>col-md-9 col-md-push-3</Col>
         <Col md={3} pull={{ md: 9 }}>col-md-3 col-md-pull-9</Col>

@@ -58,7 +58,7 @@ import {
 ## Usage
 
 ```jsx
-<Container fluid gutterWidth={20}>
+<Container fluid gutterWidth={30}>
     <Row>
         <Col xs md={8}>col-md-8</Col>
         <Col width={6} md={4}>col-6 col-md-4</Col>
@@ -87,14 +87,19 @@ You can wrap `<Container />`, `<Row />`, and `<Col />` in `<Provider />` to pass
     gutterWidth={0}
     layout="flexbox"
 >
-    <Container>
+    <Container fluid>
         <Row>
             <Col>col</Col>
             <Col>col</Col>
             <Col>col</Col>
         </Row>
     </Container>
-    <Container>
+    <Container
+        fluid
+        columns={24}
+        gutterWidth={30}
+        layout="floats"
+    >
         <Row>
             <Col>col</Col>
             <Col>col</Col>
@@ -103,7 +108,26 @@ You can wrap `<Container />`, `<Row />`, and `<Col />` in `<Provider />` to pass
 </Provider>
 ```
 
-### Visible
+### Responsive Utilities
+
+Use responsive utilities for showing and hiding content based on current viewport.
+
+#### Hidden
+
+Make an element hidden when the viewport is at the given breakpoint.
+
+```jsx
+<Hidden xs sm>
+    Hidden on extra small and small
+</Hidden>
+<Hidden md lg>
+    Hidden on medium and large
+</Hidden>
+```
+
+#### Visible
+
+Make an element visible when the viewport is at the given breakpoint.
 
 ```jsx
 <Visible xs>
@@ -126,15 +150,20 @@ You can wrap `<Container />`, `<Row />`, and `<Col />` in `<Provider />` to pass
 </Visible>
 ```
 
-### Hidden
+#### ScreenClass
+
+Render content based on the screen class.
 
 ```jsx
-<Hidden xs sm>
-    Hidden on extra small and small
-</Hidden>
-<Hidden md lg>
-    Hidden on medium and large
-</Hidden>
+<ScreenClass>
+    {screenClass => <div>{screenClass}</div>}
+</ScreenClass>
+```
+
+```jsx
+<ScreenClass
+    render={screenClass => <div>{screenClass}</div> }
+/>
 ```
 
 ## API
@@ -207,6 +236,12 @@ md | Boolean | false | Hidden on medimum devices.
 lg | Boolean | false | Hidden on large devices.
 xl | Boolean | false | Hidden on extra large devices.
 xxl | Boolean | false | Hidden on double extra large devices.
+
+#### ScreenClass
+
+Name | Type | Default | Description 
+:--- | :--- | :------ | :----------
+render | Function(screenClass) | | The render function that returns a React element.
 
 ## License
 

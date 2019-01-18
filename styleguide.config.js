@@ -114,7 +114,8 @@ module.exports = {
                 'Row',
                 'Col',
                 'Hidden',
-                'Visible'
+                'Visible',
+                'ScreenClass',
             ].map(c => path.resolve(__dirname, `src/${c}.jsx`))
         }
     ],
@@ -132,7 +133,8 @@ module.exports = {
     usageMode: 'expand',
     showSidebar: true,
     styleguideComponents: {
-        Wrapper: path.resolve(__dirname, 'styleguide/Wrapper.jsx'),
+        StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuideRenderer.jsx'),
+        Wrapper: path.join(__dirname, 'styleguide/components/Wrapper.jsx'),
     },
     styleguideDir: 'docs/',
     webpackConfig: webpackConfig

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { ScreenClassContext } from './context';
 
 const hidden = (screenClass, { xs, sm, md, lg, xl, xxl }) => {
@@ -24,53 +24,45 @@ const hidden = (screenClass, { xs, sm, md, lg, xl, xxl }) => {
     return true; // Defaults to true
 };
 
-class Hidden extends PureComponent {
-    static propTypes = {
-        // Hidden on extra small devices.
-        xs: PropTypes.bool,
+const Hidden = ({ xs, sm, md, lg, xl, xxl, children }) => (
+    <ScreenClassContext.Consumer>
+        {screenClass => {
+            if (hidden(screenClass, { xs, sm, md, lg, xl, xxl })) {
+                return null;
+            }
 
-        // Hidden on small devices.
-        sm: PropTypes.bool,
+            return children;
+        }}
+    </ScreenClassContext.Consumer>
+);
 
-        // Hidden on medium devices.
-        md: PropTypes.bool,
+Hidden.propTypes = {
+    // Hidden on extra small devices.
+    xs: PropTypes.bool,
 
-        // Hidden on large devices.
-        lg: PropTypes.bool,
+    // Hidden on small devices.
+    sm: PropTypes.bool,
 
-        // Hidden on extra large devices.
-        xl: PropTypes.bool,
+    // Hidden on medium devices.
+    md: PropTypes.bool,
 
-        // Hidden on double extra large devices.
-        xxl: PropTypes.bool,
-    };
+    // Hidden on large devices.
+    lg: PropTypes.bool,
 
-    static defaultProps = {
-        xs: false,
-        sm: false,
-        md: false,
-        lg: false,
-        xl: false,
-        xxl: false,
-    };
+    // Hidden on extra large devices.
+    xl: PropTypes.bool,
 
-    render() {
-        const {
-            xs, sm, md, lg, xl, xxl,
-        } = this.props;
+    // Hidden on double extra large devices.
+    xxl: PropTypes.bool,
+};
 
-        return (
-            <ScreenClassContext.Consumer>
-                {screenClass => {
-                    if (hidden(screenClass, { xs, sm, md, lg, xl, xxl })) {
-                        return null;
-                    }
-
-                    return this.props.children;
-                }}
-            </ScreenClassContext.Consumer>
-        );
-    }
-}
+Hidden.defaultProps = {
+    xs: false,
+    sm: false,
+    md: false,
+    lg: false,
+    xl: false,
+    xxl: false,
+};
 
 export default Hidden;

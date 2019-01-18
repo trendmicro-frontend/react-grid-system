@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { ScreenClassContext } from './context';
 
 const visible = (screenClass, { xs, sm, md, lg, xl, xxl }) => {
@@ -24,56 +24,45 @@ const visible = (screenClass, { xs, sm, md, lg, xl, xxl }) => {
     return true; // Defaults to true
 };
 
-class Visible extends PureComponent {
-    static propTypes = {
-        // Visible on extra small devices.
-        xs: PropTypes.bool,
+const Visible = ({ xs, sm, md, lg, xl, xxl, children }) => (
+    <ScreenClassContext.Consumer>
+        {screenClass => {
+            if (visible(screenClass, { xs, sm, md, lg, xl, xxl })) {
+                return children;
+            }
 
-        // Visible on small devices.
-        sm: PropTypes.bool,
+            return null;
+        }}
+    </ScreenClassContext.Consumer>
+);
 
-        // Visible on medimum devices.
-        md: PropTypes.bool,
+Visible.propTypes = {
+    // Visible on extra small devices.
+    xs: PropTypes.bool,
 
-        // Visible on large devices.
-        lg: PropTypes.bool,
+    // Visible on small devices.
+    sm: PropTypes.bool,
 
-        // Visible on extra large devices.
-        xl: PropTypes.bool,
+    // Visible on medimum devices.
+    md: PropTypes.bool,
 
-        // Visible on double extra large devices.
-        xxl: PropTypes.bool,
+    // Visible on large devices.
+    lg: PropTypes.bool,
 
-        // A callback fired when the resize event occurs.
-        onResize: PropTypes.func
-    };
+    // Visible on extra large devices.
+    xl: PropTypes.bool,
 
-    static defaultProps = {
-        xs: false,
-        sm: false,
-        md: false,
-        lg: false,
-        xl: false,
-        xxl: false,
-    };
+    // Visible on double extra large devices.
+    xxl: PropTypes.bool,
+};
 
-    render() {
-        const {
-            xs, sm, md, lg, xl, xxl,
-        } = this.props;
-
-        return (
-            <ScreenClassContext.Consumer>
-                {screenClass => {
-                    if (visible(screenClass, { xs, sm, md, lg, xl, xxl })) {
-                        return this.props.children;
-                    }
-
-                    return null;
-                }}
-            </ScreenClassContext.Consumer>
-        );
-    }
-}
+Visible.defaultProps = {
+    xs: false,
+    sm: false,
+    md: false,
+    lg: false,
+    xl: false,
+    xxl: false,
+};
 
 export default Visible;

@@ -1,7 +1,7 @@
 ### Equal width
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row>
         <Col>1 of 2</Col>
         <Col>2 of 2</Col>
@@ -17,8 +17,8 @@
 ### Custom columns
 
 ```jsx
-<Container layout="flexbox">
-    <Row columns={20}>
+<Container fluid columns={20} layout="flexbox">
+    <Row>
         <Col sm={5} md={4} xl={2}>col</Col>
         <Col sm={5} md={4} xl={2}>col</Col>
         <Col sm={5} md={4} xl={2}>col</Col>
@@ -33,7 +33,7 @@
 ### Setting one column width
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row>
         <Col>1 of 3</Col>
         <Col width={6}>2 of 3 (wider)</Col>
@@ -50,7 +50,7 @@
 ### Variable width content
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row style={{ justifyContent: 'center' }}>
         <Col xs lg={2}>1 of 3</Col>
         <Col width={12} md="auto">Variable width content</Col>
@@ -67,7 +67,7 @@
 ### Equal-width multi-row
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row>
         <Col>col</Col>
         <Col>col</Col>
@@ -82,7 +82,7 @@
 ### All breakpoints
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row>
         <Col>col</Col>
         <Col>col</Col>
@@ -99,7 +99,7 @@
 ### Stacked to horizontal
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row>
         <Col sm={8}>col-sm-8</Col>
         <Col sm={4}>col-sm-4</Col>
@@ -115,7 +115,7 @@
 ### Mix and match
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row>
         <Col xs md={8}>col-md-8</Col>
         <Col width={6} md={4}>col-6 col-md-4</Col>
@@ -135,7 +135,7 @@
 ### Vertical alignment
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row
         style={{
             alignItems: 'flex-start',
@@ -185,7 +185,7 @@
 ### Horizontal alignment
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row style={{ justifyContent: 'flex-start' }}>
         <Col width={4}>One of two columns</Col>
         <Col width={4}>One of two columns</Col>
@@ -212,7 +212,7 @@
 ### No gutters
 
 ```jsx
-<Container layout="flexbox" gutterWidth={0}>
+<Container fluid layout="flexbox" gutterWidth={0}>
     <Row>
         <Col width={12} sm={6} md={8}>col-12 col-sm-6 col-md-8</Col>
         <Col width={6} md={4}>col-6 col-md-4</Col>
@@ -223,7 +223,7 @@
 ### Column wrapping
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row>
         <Col width={9}>col-9</Col>
         <Col width={4}>col-4</Col>
@@ -235,7 +235,7 @@
 ### Column breaks
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row>
         <Col width={6} sm={3}>col-6 col-sm-3</Col>
         <Col width={6} sm={3}>col-6 col-sm-3</Col>
@@ -250,7 +250,7 @@
 ### Offsetting columns
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row>
         <Col md={4}>col-md-4</Col>
         <Col md={4} offset={{ md: 4 }}>col-md-4 col-offset-md-4</Col>
@@ -276,7 +276,7 @@
 ### Auto margin
 
 ```jsx
-<Container layout="flexbox">
+<Container fluid layout="flexbox">
     <Row>
         <Col md={4}>col-md-4</Col>
         <Col md={4} style={{ marginLeft: 'auto' }}>col-md-4 ml-auto</Col>
@@ -291,7 +291,7 @@
 ### Nesting
 
 ```jsx
-<Container layout="floats">
+<Container fluid layout="floats">
     <Row>
         <Col sm={9}>
             Level 1: col-sm-9

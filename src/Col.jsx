@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
     LAYOUT_FLEXBOX,
     LAYOUT_FLOATS,
@@ -57,7 +57,7 @@ const getWidth = (width, columns) => {
     return `${((100 / columns) * colWidth).toFixed(8) * 1}%`;
 };
 
-class Col extends PureComponent {
+class Col extends Component {
     static propTypes = {
         // The width of the column for all screen classes.
         width: PropTypes.oneOfType([
@@ -146,8 +146,9 @@ class Col extends PureComponent {
 
     getFloatsStyle = ({ columns, gutterWidth, screenClass }) => {
         const style = {
+            boxSizing: 'border-box',
             paddingLeft: gutterWidth / 2,
-            paddingRight: gutterWidth / 2
+            paddingRight: gutterWidth / 2,
         };
 
         if (this.props.width) {
@@ -180,9 +181,10 @@ class Col extends PureComponent {
 
     getFlexboxStyle = ({ columns, gutterWidth, screenClass }) => {
         const style = {
+            boxSizing: 'border-box',
             paddingLeft: gutterWidth / 2,
             paddingRight: gutterWidth / 2,
-            flexShrink: 0
+            flexShrink: 0,
         };
 
         // <Col width={6}>col</Col>
