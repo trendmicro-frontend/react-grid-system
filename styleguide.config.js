@@ -1,36 +1,18 @@
 const path = require('path');
-const findImports = require('find-imports');
 const stylusLoader = require('stylus-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nib = require('nib');
 const webpack = require('webpack');
 const pkg = require('./package.json');
-const babelConfig = require('./babel.config');
 
-const publicname = pkg.name.replace(/^@\w+\//, ''); // Strip out "@trendmicro/" from package name
-const banner = [
-    publicname + ' v' + pkg.version,
-    '(c) ' + new Date().getFullYear() + ' Trend Micro Inc.',
-    pkg.license,
-    pkg.homepage
-].join(' | ');
-const localClassPrefix = publicname.replace(/^react-/, ''); // Strip out "react-" from publicname
-
-module.exports = {
-    mode: 'development',
+const webpackConfig = {
+    mode: 'production',
     devtool: 'source-map',
-    entry: {
-        [publicname]: path.resolve(__dirname, 'src/index.js')
+    devServer: {
+        disableHostCheck: true,
+        contentBase: path.resolve(__dirname, 'docs'),
     },
-    output: {
-        path: path.join(__dirname, 'lib'),
-        filename: 'index.js',
-        libraryTarget: 'commonjs2'
-    },
-    externals: []
-        .concat(findImports(['src/**/*.{js,jsx}'], { flatten: true }))
-        .concat(Object.keys(pkg.peerDependencies))
-        .concat(Object.keys(pkg.dependencies)),
+    entry: path.resolve(__dirname, 'src/index.js'),
     module: {
         rules: [
             {
@@ -42,8 +24,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/,
-                options: babelConfig
+                exclude: /node_modules/
             },
             {
                 test: /\.styl$/,
@@ -53,7 +34,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            localIdentName: `${localClassPrefix}---[local]---[hash:base64:5]`,
+                            localIdentName: '[local]---[hash:base64:5]',
                             camelCase: true,
                             importLoaders: 1
                         }
@@ -102,11 +83,59 @@ module.exports = {
             }
         }),
         new MiniCssExtractPlugin({
-            filename: '../dist/[name].css',
-        }),
-        new webpack.BannerPlugin(banner)
+            filename: '[name].css'
+        })
     ],
     resolve: {
         extensions: ['.js', '.json', '.jsx']
     }
+};
+
+module.exports = {
+    title: `React Grid System v${pkg.version}`,
+    sections: [
+        {
+            name: 'Layout: Flexbox',
+            content: path.resolve(__dirname, 'styleguide/flexbox/README.md')
+        },
+        {
+            name: 'Layout: Floats',
+            content: path.resolve(__dirname, 'styleguide/floats/README.md')
+        },
+        {
+            name: 'Responsive Utilities',
+            content: path.resolve(__dirname, 'styleguide/responsive-utilities/README.md')
+        },
+        {
+            name: 'Components',
+            components: [
+                'Provider',
+                'Container',
+                'Row',
+                'Col',
+                'Hidden',
+                'Visible',
+                'ScreenClass',
+            ].map(c => path.resolve(__dirname, `src/${c}.jsx`))
+        }
+    ],
+    require: [
+        '@babel/polyfill',
+        path.resolve(__dirname, 'styleguide/setup.js'),
+        path.resolve(__dirname, 'styleguide/styles.css')
+    ],
+    ribbon: {
+        url: pkg.homepage,
+        text: 'Fork me on GitHub'
+    },
+    serverPort: 8080,
+    exampleMode: 'expand',
+    usageMode: 'expand',
+    showSidebar: true,
+    styleguideComponents: {
+        StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuideRenderer.jsx'),
+        Wrapper: path.join(__dirname, 'styleguide/components/GridSystemProvider.jsx'),
+    },
+    styleguideDir: 'docs/',
+    webpackConfig: webpackConfig
 };
