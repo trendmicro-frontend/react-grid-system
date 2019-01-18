@@ -11,7 +11,8 @@ import {
     DEFAULT_GUTTER_WIDTH,
     DEFAULT_LAYOUT,
 } from './constants';
-import { ConfigurationContext, ScreenClassContext } from './context';
+import Resolver from './Resolver';
+import { ConfigurationContext } from './context';
 import styles from './index.styl';
 
 class Container extends PureComponent {
@@ -109,58 +110,54 @@ class Container extends PureComponent {
         } = this.props;
 
         return (
-            <ConfigurationContext.Consumer>
-                {config => (
-                    <ScreenClassContext.Consumer>
-                        {screenClass => {
-                            config = { ...config };
-                            const containerWidths = (() => {
-                                const containerWidths = ensureArray(config.containerWidths);
-                                return containerWidths.length > 0 ? containerWidths : DEFAULT_CONTAINER_WIDTHS;
-                            })();
-                            const columns = (() => {
-                                const { columns = config.columns } = this.props;
-                                return Number(columns) > 0 ? Number(columns) : DEFAULT_COLUMNS;
-                            })();
-                            const gutterWidth = (() => {
-                                const { gutterWidth = config.gutterWidth } = this.props;
-                                return Number(gutterWidth) >= 0 ? (Number(gutterWidth) || 0) : DEFAULT_GUTTER_WIDTH;
-                            })();
-                            const layout = (() => {
-                                const { layout = config.layout } = this.props;
-                                return (LAYOUTS.indexOf(layout) >= 0) ? layout : DEFAULT_LAYOUT;
-                            })();
-                            const containerStyle = this.getStyle({ containerWidths, gutterWidth, screenClass });
+            <Resolver>
+                {({ config, screenClass }) => {
+                    config = { ...config };
+                    const containerWidths = (() => {
+                        const containerWidths = ensureArray(config.containerWidths);
+                        return containerWidths.length > 0 ? containerWidths : DEFAULT_CONTAINER_WIDTHS;
+                    })();
+                    const columns = (() => {
+                        const { columns = config.columns } = this.props;
+                        return Number(columns) > 0 ? Number(columns) : DEFAULT_COLUMNS;
+                    })();
+                    const gutterWidth = (() => {
+                        const { gutterWidth = config.gutterWidth } = this.props;
+                        return Number(gutterWidth) >= 0 ? (Number(gutterWidth) || 0) : DEFAULT_GUTTER_WIDTH;
+                    })();
+                    const layout = (() => {
+                        const { layout = config.layout } = this.props;
+                        return (LAYOUTS.indexOf(layout) >= 0) ? layout : DEFAULT_LAYOUT;
+                    })();
+                    const containerStyle = this.getStyle({ containerWidths, gutterWidth, screenClass });
 
-                            return (
-                                <ConfigurationContext.Provider
-                                    value={{
-                                        ...config,
-                                        containerWidths,
-                                        columns,
-                                        gutterWidth,
-                                        layout,
-                                    }}
-                                >
-                                    <div
-                                        {...props}
-                                        className={cx(className, {
-                                            [styles.flexboxContainer]: layout === LAYOUT_FLEXBOX,
-                                            [styles.floatsContainer]: layout === LAYOUT_FLOATS,
-                                        })}
-                                        style={{
-                                            ...containerStyle,
-                                            ...style,
-                                        }}
-                                    >
-                                        {children}
-                                    </div>
-                                </ConfigurationContext.Provider>
-                            );
-                        }}
-                    </ScreenClassContext.Consumer>
-                )}
-            </ConfigurationContext.Consumer>
+                    return (
+                        <ConfigurationContext.Provider
+                            value={{
+                                ...config,
+                                containerWidths,
+                                columns,
+                                gutterWidth,
+                                layout,
+                            }}
+                        >
+                            <div
+                                {...props}
+                                className={cx(className, {
+                                    [styles.flexboxContainer]: layout === LAYOUT_FLEXBOX,
+                                    [styles.floatsContainer]: layout === LAYOUT_FLOATS,
+                                })}
+                                style={{
+                                    ...containerStyle,
+                                    ...style,
+                                }}
+                            >
+                                {children}
+                            </div>
+                        </ConfigurationContext.Provider>
+                    );
+                }}
+            </Resolver>
         );
     }
 }

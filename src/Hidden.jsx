@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ScreenClassContext } from './context';
+import Resolver from './Resolver';
 
 const hidden = (screenClass, { xs, sm, md, lg, xl, xxl }) => {
     if (screenClass === 'xxl') {
@@ -25,15 +25,15 @@ const hidden = (screenClass, { xs, sm, md, lg, xl, xxl }) => {
 };
 
 const Hidden = ({ xs, sm, md, lg, xl, xxl, children }) => (
-    <ScreenClassContext.Consumer>
-        {screenClass => {
+    <Resolver>
+        {({ screenClass }) => {
             if (hidden(screenClass, { xs, sm, md, lg, xl, xxl })) {
                 return null;
             }
 
             return children;
         }}
-    </ScreenClassContext.Consumer>
+    </Resolver>
 );
 
 Hidden.propTypes = {

@@ -6,7 +6,7 @@ import {
     LAYOUT_FLOATS,
     SCREEN_CLASSES,
 } from './constants';
-import { ConfigurationContext, ScreenClassContext } from './context';
+import Resolver from './Resolver';
 import styles from './index.styl';
 
 const flexboxAutoprefixer = (style) => Object.keys(style).reduce((obj, key) => {
@@ -253,38 +253,34 @@ class Col extends Component {
         } = this.props;
 
         return (
-            <ConfigurationContext.Consumer>
-                {config => (
-                    <ScreenClassContext.Consumer>
-                        {screenClass => {
-                            const { columns, gutterWidth, layout } = config;
-                            let colStyle = {};
-                            if (layout === LAYOUT_FLEXBOX) {
-                                colStyle = this.getFlexboxStyle({ columns, gutterWidth, screenClass });
-                            }
-                            if (layout === LAYOUT_FLOATS) {
-                                colStyle = this.getFloatsStyle({ columns, gutterWidth, screenClass });
-                            }
+            <Resolver>
+                {({ config, screenClass }) => {
+                    const { columns, gutterWidth, layout } = config;
+                    let colStyle = {};
+                    if (layout === LAYOUT_FLEXBOX) {
+                        colStyle = this.getFlexboxStyle({ columns, gutterWidth, screenClass });
+                    }
+                    if (layout === LAYOUT_FLOATS) {
+                        colStyle = this.getFloatsStyle({ columns, gutterWidth, screenClass });
+                    }
 
-                            return (
-                                <div
-                                    {...props}
-                                    className={cx(className, {
-                                        [styles.flexboxCol]: layout === LAYOUT_FLEXBOX,
-                                        [styles.floatsCol]: layout === LAYOUT_FLOATS
-                                    })}
-                                    style={{
-                                        ...colStyle,
-                                        ...style
-                                    }}
-                                >
-                                    {children}
-                                </div>
-                            );
-                        }}
-                    </ScreenClassContext.Consumer>
-                )}
-            </ConfigurationContext.Consumer>
+                    return (
+                        <div
+                            {...props}
+                            className={cx(className, {
+                                [styles.flexboxCol]: layout === LAYOUT_FLEXBOX,
+                                [styles.floatsCol]: layout === LAYOUT_FLOATS
+                            })}
+                            style={{
+                                ...colStyle,
+                                ...style
+                            }}
+                        >
+                            {children}
+                        </div>
+                    );
+                }}
+            </Resolver>
         );
     }
 }

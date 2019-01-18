@@ -134,7 +134,7 @@ module.exports = {
     showSidebar: true,
     styleguideComponents: {
         StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuideRenderer.jsx'),
-        Wrapper: path.join(__dirname, 'styleguide/components/Wrapper.jsx'),
+        Wrapper: path.join(__dirname, 'styleguide/components/GridSystemProvider.jsx'),
     },
     styleguideDir: 'docs/',
     webpackConfig: webpackConfig

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ScreenClassContext } from './context';
+import Resolver from './Resolver';
 
 const visible = (screenClass, { xs, sm, md, lg, xl, xxl }) => {
     if (screenClass === 'xxl') {
@@ -25,15 +25,15 @@ const visible = (screenClass, { xs, sm, md, lg, xl, xxl }) => {
 };
 
 const Visible = ({ xs, sm, md, lg, xl, xxl, children }) => (
-    <ScreenClassContext.Consumer>
-        {screenClass => {
+    <Resolver>
+        {({ screenClass }) => {
             if (visible(screenClass, { xs, sm, md, lg, xl, xxl })) {
                 return children;
             }
 
             return null;
         }}
-    </ScreenClassContext.Consumer>
+    </Resolver>
 );
 
 Visible.propTypes = {

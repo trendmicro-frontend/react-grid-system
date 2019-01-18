@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import GitHubCorner from 'react-github-corner';
 import { ScreenClass } from '../../src';
-import Wrapper from './Wrapper';
+import GridSystemProvider from './GridSystemProvider';
 import pkg from '../../package.json';
 
 const Root = styled.div`
@@ -47,7 +47,7 @@ const StyleGuideRenderer = ({
 }) => (
     <Root>
         <GitHubCorner href={pkg.homepage} />
-        <Wrapper>
+        <GridSystemProvider>
             <Main id="example">
                 {children}
             </Main>
@@ -62,7 +62,7 @@ const StyleGuideRenderer = ({
                 </TextBlock>
                 <div>{toc}</div>
             </Sidebar>
-        </Wrapper>
+        </GridSystemProvider>
     </Root>
 );
 

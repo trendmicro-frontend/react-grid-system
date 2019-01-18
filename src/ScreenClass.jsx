@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ScreenClassContext } from './context';
+import Resolver from './Resolver';
 
 const ScreenClass = ({ render, children }) => (
-    <ScreenClassContext.Consumer>
-        {screenClass => {
+    <Resolver>
+        {({ screenClass }) => {
             if (typeof children === 'function') {
                 return children(screenClass);
             }
@@ -15,7 +15,7 @@ const ScreenClass = ({ render, children }) => (
 
             return children;
         }}
-    </ScreenClassContext.Consumer>
+    </Resolver>
 );
 
 ScreenClass.propTypes = {

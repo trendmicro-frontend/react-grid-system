@@ -4,7 +4,7 @@ import {
     LAYOUT_FLEXBOX,
     LAYOUT_FLOATS,
 } from './constants';
-import { ConfigurationContext, ScreenClassContext } from './context';
+import Resolver from './Resolver';
 import styles from './index.styl';
 
 class Row extends PureComponent {
@@ -26,32 +26,28 @@ class Row extends PureComponent {
         } = this.props;
 
         return (
-            <ConfigurationContext.Consumer>
-                {config => (
-                    <ScreenClassContext.Consumer>
-                        {screenClass => {
-                            const { gutterWidth, layout } = config;
-                            const rowStyle = this.getStyle({ gutterWidth });
+            <Resolver>
+                {({ config, screenClass }) => {
+                    const { gutterWidth, layout } = config;
+                    const rowStyle = this.getStyle({ gutterWidth });
 
-                            return (
-                                <div
-                                    {...props}
-                                    className={cx(className, {
-                                        [styles.flexboxRow]: layout === LAYOUT_FLEXBOX,
-                                        [styles.floatsRow]: layout === LAYOUT_FLOATS,
-                                    })}
-                                    style={{
-                                        ...rowStyle,
-                                        ...style,
-                                    }}
-                                >
-                                    {children}
-                                </div>
-                            );
-                        }}
-                    </ScreenClassContext.Consumer>
-                )}
-            </ConfigurationContext.Consumer>
+                    return (
+                        <div
+                            {...props}
+                            className={cx(className, {
+                                [styles.flexboxRow]: layout === LAYOUT_FLEXBOX,
+                                [styles.floatsRow]: layout === LAYOUT_FLOATS,
+                            })}
+                            style={{
+                                ...rowStyle,
+                                ...style,
+                            }}
+                        >
+                            {children}
+                        </div>
+                    );
+                }}
+            </Resolver>
         );
     }
 }

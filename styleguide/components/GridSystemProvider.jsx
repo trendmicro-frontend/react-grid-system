@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from '../../src';
 
-const Wrapper = (props) => (
+const GridSystemProvider = (props) => (
     <Provider
         breakpoints={[576, 768, 992, 1200, 1600]}
         containerWidths={[540, 720, 960, 1140, 1440]}
@@ -13,4 +13,4 @@ const Wrapper = (props) => (
     </Provider>
 );
 
-export default Wrapper;
+export default GridSystemProvider;
