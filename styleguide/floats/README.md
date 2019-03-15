@@ -52,25 +52,25 @@
 
 ```jsx
 <Container fluid layout="floats">
-    <Fragment>
-        Stack the columns on mobile by making one full-width and the other half-width
-    </Fragment>
     <Row>
+        <div>
+            Stack the columns on mobile by making one full-width and the other half-width
+        </div>
         <Col xs={12} md={8}>col-xs-12 col-md-8</Col>
         <Col xs={6} md={4}>col-xs-6 col-md-4</Col>
     </Row>
-    <Fragment>
-        Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop
-    </Fragment>
     <Row>
+        <div>
+            Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop
+        </div>
         <Col xs={6} md={4}>col-xs-6 col-md-4</Col>
         <Col xs={6} md={4}>col-xs-6 col-md-4</Col>
         <Col xs={6} md={4}>col-xs-6 col-md-4</Col>
     </Row>
-    <Fragment>
-        Columns are always 50% wide, on mobile and desktop
-    </Fragment>
     <Row>
+        <div>
+            Columns are always 50% wide, on mobile and desktop
+        </div>
         <Col xs={6}>col-xs-6</Col>
         <Col xs={6}>col-xs-6</Col>
     </Row>

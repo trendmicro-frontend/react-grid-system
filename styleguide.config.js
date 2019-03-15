@@ -6,8 +6,8 @@ const webpack = require('webpack');
 const pkg = require('./package.json');
 
 const webpackConfig = {
-    mode: 'production',
-    devtool: 'source-map',
+    mode: 'development',
+    devtool: 'cheap-module-eval-source-map',
     devServer: {
         disableHostCheck: true,
         contentBase: path.resolve(__dirname, 'docs'),
@@ -134,7 +134,7 @@ module.exports = {
     showSidebar: true,
     styleguideComponents: {
         StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuideRenderer.jsx'),
-        Wrapper: path.join(__dirname, 'styleguide/components/GridSystemProvider.jsx'),
+        Wrapper: path.join(__dirname, 'styleguide/components/Wrapper.jsx'),
     },
     styleguideDir: 'docs/',
     webpackConfig: webpackConfig

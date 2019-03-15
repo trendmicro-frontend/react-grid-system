@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import { Button, ButtonGroup } from 'react-bootstrap-buttons';
+import 'react-bootstrap-buttons/dist/react-bootstrap-buttons.css';
 import GitHubCorner from 'react-github-corner';
+import styled from 'styled-components';
 import { ScreenClass } from '../../src';
-import GridSystemProvider from './GridSystemProvider';
 import pkg from '../../package.json';
+import store, { initialState } from './store';
 
 const Root = styled.div`
     min-height: 100vh;
@@ -31,6 +33,11 @@ const Sidebar = styled.div`
     -webkit-overflow-scrolling: touch;
 `;
 
+const Space = styled.span`
+    display: inline-block;
+    width: ${props => props.width}px;
+`;
+
 const TextBlock = styled.div`
     padding: 16px;
     border-bottom: 1px #e8e8e8 solid;
@@ -40,17 +47,33 @@ const TextBlock = styled.div`
     font-weight: normal;
 `;
 
+const handleChangeGutterWidth = (gutterWidth) => () => {
+    store.dispatch({ type: 'SET_GUTTER_WIDTH', payload: gutterWidth });
+};
+
 const StyleGuideRenderer = ({
     title,
     toc,
     children,
-}) => (
-    <Root>
-        <GitHubCorner href={pkg.homepage} />
-        <GridSystemProvider>
-            <Main id="example">
-                {children}
-            </Main>
+}) => {
+    const [gutterWidth, setGutterWidth] = useState(initialState.gutterWidth);
+
+    useEffect(() => {
+        const handleStateChange = () => {
+            const { gutterWidth } = store.getState();
+            setGutterWidth(gutterWidth);
+        };
+
+        const unsubscribe = store.subscribe(handleStateChange);
+
+        return () => {
+            unsubscribe(handleStateChange);
+        };
+    }, []); // Only run on mount and unmount
+
+    return (
+        <Root>
+            <GitHubCorner href={pkg.homepage} />
             <Sidebar>
                 <TextBlock>
                     {title}
@@ -60,11 +83,41 @@ const StyleGuideRenderer = ({
                         {screenClass => `Screen class: ${screenClass}`}
                     </ScreenClass>
                 </TextBlock>
+                <TextBlock>
+                    Gutter width
+                    <Space width={8} />
+                    <ButtonGroup btnSize="sm">
+                        <Button
+                            btnStyle={gutterWidth === 0 ? 'dark' : 'default'}
+                            onClick={handleChangeGutterWidth(0)}
+                            style={{ minWidth: 32 }}
+                        >
+                            0
+                        </Button>
+                        <Button
+                            btnStyle={gutterWidth === 24 ? 'dark' : 'default'}
+                            onClick={handleChangeGutterWidth(24)}
+                            style={{ minWidth: 32 }}
+                        >
+                            24
+                        </Button>
+                        <Button
+                            btnStyle={gutterWidth === 48 ? 'dark' : 'default'}
+                            onClick={handleChangeGutterWidth(48)}
+                            style={{ minWidth: 32 }}
+                        >
+                            48
+                        </Button>
+                    </ButtonGroup>
+                </TextBlock>
                 <div>{toc}</div>
             </Sidebar>
-        </GridSystemProvider>
-    </Root>
-);
+            <Main id="example">
+                {children}
+            </Main>
+        </Root>
+    );
+};
 
 StyleGuideRenderer.propTypes = {
     title: PropTypes.string,
