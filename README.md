@@ -177,7 +177,7 @@ Name | Type | Default | Description
 breakpoints | Number[] | [576, 768, 992, 1200, 0] | The breakpoints (minimum width) of devices in screen class `sm`, `md`, `lg`, `xl`, and `xxl`.
 containerWidths | Number[] | [540, 720, 960, 1140, 0] | The container widths in pixels of devices in screen class `sm`, `md`, `lg`, `xl`, and `xxl`.
 columns | Number | 12 | The number of columns.
-gutterWidth | Number | 30 | The horizontal padding (called gutter) between two columns. A gutter width of 30 means 15px on each side of a column.
+gutterWidth | Number | 0 | The horizontal padding (called gutter) between two columns. A gutter width of 30 means 15px on each side of a column.
 layout | One of:<br>'flexbox'<br>'floats' | 'flexbox' | The grid system layout.
 
 #### Container
