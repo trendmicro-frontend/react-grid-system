@@ -1,4 +1,4 @@
-/*! react-grid-system v1.0.0 | (c) 2019 Trend Micro Inc. | MIT | https://github.com/trendmicro-frontend/react-grid-system */
+/*! react-grid-system v1.1.0 | (c) 2019 Trend Micro Inc. | MIT | https://github.com/trendmicro-frontend/react-grid-system */
 /**
  * Container
  */
@@ -8,7 +8,6 @@
   margin-right: auto;
 }
 .grid-system---floats-container---ucGke {
-  zoom: 1;
   position: relative;
   margin-right: auto;
   margin-left: auto;
@@ -24,9 +23,6 @@
 /**
  * Row
  */
-.grid-system---floats-row---3L-46 {
-  zoom: 1;
-}
 .grid-system---floats-row---3L-46:before,
 .grid-system---floats-row---3L-46:after {
   content: "";
@@ -36,24 +32,13 @@
   clear: both;
 }
 .grid-system---flexbox-row---38uB8 {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: box;
   display: flex;
-  -webkit-box-lines: multiple;
-  -moz-box-lines: multiple;
-  -o-box-lines: multiple;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 /**
  * Col
  */
 .grid-system---floats-col---LUxzY {
-  zoom: 1;
   float: left;
   position: relative;
   width: 100%;
