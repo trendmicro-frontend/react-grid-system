@@ -31,10 +31,11 @@ const webpackConfig = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
-                            localIdentName: '[local]---[hash:base64:5]',
-                            camelCase: true,
-                            importLoaders: 1
+                            modules: {
+                                localIdentName: '[local]---[hash:base64:5]',
+                            },
+                            importLoaders: 1,
+                            localsConvention: 'camelCase',
                         }
                     },
                     'stylus-loader'

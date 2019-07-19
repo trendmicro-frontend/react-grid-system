@@ -7,7 +7,6 @@
   margin-right: auto;
 }
 .floats-container---ucGke {
-  zoom: 1;
   position: relative;
   margin-right: auto;
   margin-left: auto;
@@ -23,9 +22,6 @@
 /**
  * Row
  */
-.floats-row---3L-46 {
-  zoom: 1;
-}
 .floats-row---3L-46:before,
 .floats-row---3L-46:after {
   content: "";
@@ -35,24 +31,13 @@
   clear: both;
 }
 .flexbox-row---38uB8 {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: box;
   display: flex;
-  -webkit-box-lines: multiple;
-  -moz-box-lines: multiple;
-  -o-box-lines: multiple;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 /**
  * Col
  */
 .floats-col---LUxzY {
-  zoom: 1;
   float: left;
   position: relative;
   width: 100%;

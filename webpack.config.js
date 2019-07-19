@@ -50,10 +50,11 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
-                            localIdentName: `${localClassPrefix}---[local]---[hash:base64:5]`,
-                            camelCase: true,
-                            importLoaders: 1
+                            modules: {
+                                localIdentName: `${localClassPrefix}---[local]---[hash:base64:5]`,
+                            },
+                            importLoaders: 1,
+                            localsConvention: 'camelCase',
                         }
                     },
                     'stylus-loader'
