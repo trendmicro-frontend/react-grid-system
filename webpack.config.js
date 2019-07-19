@@ -1,8 +1,6 @@
 const path = require('path');
 const findImports = require('find-imports');
-const stylusLoader = require('stylus-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const nib = require('nib');
 const webpack = require('webpack');
 const pkg = require('./package.json');
 const babelConfig = require('./babel.config');
@@ -91,14 +89,6 @@ module.exports = {
             'process.env': {
                 // This has effect on the react lib size
                 NODE_ENV: JSON.stringify('production')
-            }
-        }),
-        new stylusLoader.OptionsPlugin({
-            default: {
-                // nib - CSS3 extensions for Stylus
-                use: [nib()],
-                // no need to have a '@import "nib"' in the stylesheet
-                import: ['~nib/lib/nib/index.styl']
             }
         }),
         new MiniCssExtractPlugin({
