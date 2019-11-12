@@ -59,7 +59,9 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "ensure-array": "^1.0.0",
+    "lodash.isequal": "^4.0.0",
     "lodash.throttle": "^4.0.0",
+    "micro-memoize": "^4.0.8",
     "prop-types": "^15.6.0"
   },
   "devDependencies": {
