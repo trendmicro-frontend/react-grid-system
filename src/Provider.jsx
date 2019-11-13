@@ -1,5 +1,5 @@
 import ensureArray from 'ensure-array';
-import throttle from 'lodash.throttle';
+import _throttle from 'lodash.throttle';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import {
@@ -12,7 +12,7 @@ import {
     DEFAULT_LAYOUT,
 } from './constants';
 import { ConfigurationContext, ScreenClassContext } from './context';
-import { getScreenClass } from './utils';
+import { getMemoizedConfig, getScreenClass } from './utils';
 
 class Provider extends PureComponent {
     static propTypes = {
@@ -55,7 +55,7 @@ class Provider extends PureComponent {
     componentDidMount() {
         this.setScreenClass();
 
-        this.eventListener = throttle(this.setScreenClass, Math.floor(1000 / 60)); // 60Hz
+        this.eventListener = _throttle(this.setScreenClass, Math.floor(1000 / 60)); // 60Hz
         window.addEventListener('resize', this.eventListener);
     }
 
@@ -76,10 +76,6 @@ class Provider extends PureComponent {
     };
 
     render() {
-        const breakpoints = (() => {
-            const breakpoints = ensureArray(this.props.breakpoints);
-            return breakpoints.length > 0 ? breakpoints : DEFAULT_BREAKPOINTS;
-        })();
         const containerWidths = (() => {
             const containerWidths = ensureArray(this.props.containerWidths);
             return containerWidths.length > 0 ? containerWidths : DEFAULT_CONTAINER_WIDTHS;
@@ -96,18 +92,11 @@ class Provider extends PureComponent {
             const layout = this.props.layout;
             return (LAYOUTS.indexOf(layout) >= 0) ? layout : DEFAULT_LAYOUT;
         })();
+        const memoizedConfig = getMemoizedConfig({ containerWidths, columns, gutterWidth, layout });
         const { screenClass } = this.state;
 
         return (
-            <ConfigurationContext.Provider
-                value={{
-                    breakpoints,
-                    containerWidths,
-                    columns,
-                    gutterWidth,
-                    layout,
-                }}
-            >
+            <ConfigurationContext.Provider value={memoizedConfig}>
                 <ScreenClassContext.Provider value={screenClass}>
                     <React.Fragment>
                         {this.props.children}

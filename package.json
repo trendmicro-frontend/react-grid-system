@@ -59,7 +59,9 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "ensure-array": "^1.0.0",
+    "lodash.isequal": "^4.0.0",
     "lodash.throttle": "^4.0.0",
+    "micro-memoize": "^4.0.8",
     "prop-types": "^15.6.0"
   },
   "devDependencies": {
@@ -95,7 +97,7 @@
     "react-bootstrap-buttons": "~0.5.0",
     "react-dom": "~16.8.0",
     "react-github-corner": "~2.3.0",
-    "react-styleguidist": "~9.1.11",
+    "react-styleguidist": "~9.0.4",
     "redux": "~4.0.4",
     "resize-observer-polyfill": "~1.5.1",
     "style-loader": "~0.23.1",

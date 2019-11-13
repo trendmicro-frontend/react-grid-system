@@ -13,6 +13,7 @@ import {
 } from './constants';
 import Resolver from './Resolver';
 import { ConfigurationContext } from './context';
+import { getMemoizedConfig } from './utils';
 import styles from './index.styl';
 
 class Container extends PureComponent {
@@ -129,18 +130,11 @@ class Container extends PureComponent {
                         const { layout = config.layout } = this.props;
                         return (LAYOUTS.indexOf(layout) >= 0) ? layout : DEFAULT_LAYOUT;
                     })();
+                    const memoizedConfig = getMemoizedConfig({ containerWidths, columns, gutterWidth, layout });
                     const containerStyle = this.getStyle({ containerWidths, gutterWidth, screenClass });
 
                     return (
-                        <ConfigurationContext.Provider
-                            value={{
-                                ...config,
-                                containerWidths,
-                                columns,
-                                gutterWidth,
-                                layout,
-                            }}
-                        >
+                        <ConfigurationContext.Provider value={memoizedConfig}>
                             <div
                                 {...props}
                                 className={cx(className, {
